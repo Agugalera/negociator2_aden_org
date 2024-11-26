@@ -1,0 +1,11 @@
+<nb-card>
+  <nb-card-header>
+    {{type == 'variable' ? 'Variables' : (type == 'seven' ? 'Siete elementos' : 'Negociación' ) }}
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table [settings]="type === 'seven' ? settingsSeven : settingsVariables" [source]="source" (edit)="goToEdit($event)" (create)="goToAdd()"
+      (deleteConfirm)="onDeleteConfirm($event)">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>

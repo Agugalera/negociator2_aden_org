@@ -1,0 +1,91 @@
+<nb-card *ngIf="block.state === 'information' || block.state === 'pre'">
+    <nb-card-body>
+        <div>
+            <div class="row" style="text-align: center;">
+                <div class="col">
+                    <h3>La etapa aún no se encuentra disponible</h3>
+                </div>
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>
+<nb-card *ngIf="block.state === 'negotation' || block.state === 'finalized'">
+    <nb-card-body>
+        <div class="row">
+            <div class="col">
+                <div class="row" fullWidth>
+                    <div class="col-12">
+                        <div class="row title">
+                            <div class="col-10">
+                                <h6>Propuesta</h6>
+                            </div>
+                            <div class="col-2" style="margin-bottom: 10px; text-align: right;">
+                                <button nbButton size="small" (click)="goHistorial()">Historial</button>
+
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col"></th>
+                                        <th scope="col">Propuesta</th>
+                                        <th scope="col">Limites</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of negotations">
+                                        <th scope="row">{{item.value}}</th>
+                                        <td>
+                                            <!-- Campo entero -->
+                                            <span *ngIf="item.type == 'numeric'">
+                                                <input nbInput type="number" name="valueReply" class="form-control"
+                                                    [(ngModel)]="item.valueReply" #value="ngModel" [min]="item.min"
+                                                    [max]="item.max" [ngClass]="{ 'is-invalid': value.invalid }">
+                                                <div *ngIf="value.invalid" class="invalid-feedback">
+                                                    <div *ngIf="value.errors.min || value.errors.max">
+                                                        Ingrese un valor dentro del rango esperado
+                                                    </div>
+                                                </div>
+                                            </span>
+                                            <!-- Campo boleano -->
+                                            <span *ngIf="item.type == 'boolean'">
+                                                <nb-checkbox [(ngModel)]="item.valueReply">
+                                                    {{item.valueReply ? 'Si' : 'No'}}
+                                                </nb-checkbox>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span *ngIf="item.type == 'numeric'">{{item.min}}-{{item.max}} {{item.unit}}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col" style="text-align: center;padding-top: 15px;">
+                        <button nbButton style="max-width: 200px;" fullWidth size="small"
+                            (click)="simulateArbotic()">Simular Arbotic</button>
+                    </div>
+                    <div class="col" style="text-align: center;padding-top: 15px;">
+                        <button nbButton style="max-width: 200px;" fullWidth size="small"
+                            (click)="simulateByntech()">Simular Byntech</button>
+                    </div>
+                </div>
+                
+                <!-- <p class="caption status-success text-right fw-700" *ngIf="negotations && negotations.length">
+                    Última actualización: {{negotations[0]. | date: 'd/M/y'}} - {{replies[0].author}} -->
+                <!-- </p> -->
+                <div *ngIf="!negotations || !negotations.length">
+                    <p>Sin datos</p>
+                </div>
+            </div>
+        </div>
+
+    </nb-card-body>
+</nb-card>

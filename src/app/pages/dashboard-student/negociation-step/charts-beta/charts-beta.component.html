@@ -1,0 +1,35 @@
+<nb-card style="max-width: 70% !important; margin: 0 auto; height: 100%;">
+  <nb-card-body>
+
+    <div class="row" style="margin-top: 20px">
+      <div class="col">
+        <h6 style="text-align: center;">Cantidades vendidas</h6>
+        <ngx-chartjs-qty-beta style="margin-top: 20px;" [cantidadesVendidas]='cantidadesVendidas'>
+        </ngx-chartjs-qty-beta>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 20px">
+      <div class="col">
+        <h6 style="text-align: center;">Ingresos por ventas</h6>
+        <ngx-chartjs-earnings-beta style="margin-top: 20px;" [resultadoOperativoBeta]='resultadoOperativoBeta'>
+        </ngx-chartjs-earnings-beta>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 20px">
+      <div class="col">
+        <h6 style="text-align: center;">Resultados generales</h6>
+        <ngx-chartjs-erdos-beta style="margin-top: 40px;" [resultadoOperativoBeta]='resultadoOperativoBeta'>
+        </ngx-chartjs-erdos-beta>
+      </div>
+    </div>
+
+
+    <div class="row" style="margin-top: 10px; margin-bottom: 20px;">
+      <div class="col" style="text-align: center;">
+        <button nbButton size="small" (click)="close()">Cerrar</button>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>

@@ -1,0 +1,76 @@
+<div class="row">
+    <div class="col" style="text-align: justify;">
+
+        <p>La primera etapa finaliza cuando podemos completar 3 elementos de los 7 elementos del Proyecto Harvard de
+            Negociación: INTERESES, M.A.A.N (alternativas) y OPCIONES (2 opciones).</p>
+
+
+        <p> Si un equipo considera necesario compartir con el equipo que está negociando alguno de estos 3 elementos,
+            deberá tildar la celda que dice; compartir (no es obligatorio).</p>
+
+    </div>
+</div>
+
+
+<div class="row" *ngIf="loadOtherElement && elementsOtherTeam && elementsOtherTeam.length">
+    <div class="col">
+        <nb-alert outline="info" role="alert">
+            <p class="title-other-team">Datos compartidos por el otro equipo</p>
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <tbody>
+                        <tr *ngFor="let item of elementsOtherTeam">
+                            <th scope="row">{{item.value}}</th>
+                            <td>
+                                <p>{{item.valueReply}}</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </nb-alert>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Variables</th>
+                        <th scope="col">Análisis</th>
+                        <th scope="col">Compartir</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of elements">
+                        <th scope="row">
+                            {{item.value}}
+                            <span *ngIf="item.required === 'true'"> (Obligatorio)</span>
+                        </th>
+                        <td>
+                            <input nbInput fullWidth type="text" name="value" class="form-control"
+                                [(ngModel)]="item.valueReply" #value="ngModel">
+                        </td>
+                        <td>
+                            <nb-toggle [(ngModel)]="item.sharedReply"></nb-toggle>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="caption status-success text-right fw-700" *ngIf="lastUpdate">Última actualización:
+                {{lastUpdate.date | date: 'd/M/y'}} - {{lastUpdate.user}}</p>
+        </div>
+        <div style="text-align: right;">
+            <button nbButton size="small" (click)="saveElements()" [nbSpinner]="loading"
+                nbSpinnerStatus="info">Enviar</button>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col button-next">
+        <button nbButton status="primary" [routerLink]="['/pages/dashboard-student/negociation']"
+            routerLinkActive="router-link-active"
+            [disabled]="state === 'pre' || state === 'information'">Siguiente</button>
+    </div>
+</div>

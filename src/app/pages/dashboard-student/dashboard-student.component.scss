@@ -1,0 +1,35 @@
+nb-tab {
+  padding: 0px !important;
+}
+:host {
+  ngx-dashboard-student {
+    height: 100% !important;
+  }
+  nb-stepper .step-content {
+    padding: 1.25rem;
+    width: 100% !important;
+  }
+}
+.example-items-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  & > * {
+    margin-bottom: 1rem;
+    width: 100%;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+.button-next {
+  text-align: center;
+  margin: 20px auto;
+}
+.row-info {
+  @media (max-width: 700px) {
+    height: 100vh !important;
+  }
+}

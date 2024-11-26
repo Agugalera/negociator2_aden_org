@@ -1,0 +1,208 @@
+<nb-card *ngIf="block.state === 'information'">
+    <nb-card-body>
+        <div>
+            <div class="row" style="text-align: center;">
+                <div class="col">
+                    <h3>La etapa aún no se encuentra disponible</h3>
+                </div>
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>
+<nb-card *ngIf="block.state !== 'information'">
+    <nb-card-body>
+        <div class="row">
+
+            <nb-tabset class="col" fullWidth (changeTab)="changeTag($event)">
+                <nb-tab tabTitle="Arbotic">
+                </nb-tab>
+                <nb-tab tabTitle="Byntech">
+                </nb-tab>
+            </nb-tabset>
+        </div>
+        <div class="row">
+            <div class="col">
+                <nb-accordion>
+                    <nb-accordion-item>
+                        <nb-accordion-item-header>Integrantes</nb-accordion-item-header>
+                        <nb-accordion-item-body>
+                            <nb-list>
+                                <nb-list-item style="padding: 0px;" *ngFor="let item of activeTeam.students">
+                                    <nb-user [name]="getFullName(item)">
+                                    </nb-user>
+                                </nb-list-item>
+                            </nb-list>
+
+                            <!-- <button nbButton fullWidth status="primary" style="margin-top: 10px;margin-bottom: 10px;">
+                                <nb-icon icon="email"></nb-icon>Enviar email a todo el equipo
+                            </button> -->
+                            <!-- <button nbButton fullWidth status="primary" style="margin-bottom: 10px;"
+                                (click)="goCanvas()">
+                                <nb-icon icon="settings"></nb-icon>Ver curso en canvas
+                            </button> -->
+                            <!-- <button nbButton fullWidth status="primary">
+                                <nb-icon icon="calendar"></nb-icon>Ver calendario
+                            </button> -->
+
+                        </nb-accordion-item-body>
+                    </nb-accordion-item>
+                    <nb-accordion-item>
+                        <nb-accordion-item-header>Clima y estrategia</nb-accordion-item-header>
+                        <nb-accordion-item-body>
+                            <div class="row">
+                                <div class="col">
+                                    <p></p>
+                                    <h6 class="title-section">Clima en la negociación</h6>
+                                    <span *ngIf="climate">
+                                        <p>
+                                            {{climate?.value}}
+                                        </p>
+
+                                        <p class="title-section">Corrección</p>
+
+                                        <textarea nbInput fullWidth placeholder="Correción"
+                                            [(ngModel)]="climate.teacher_return"></textarea>
+
+                                        <button nbButton size="small" (click)="saveReturnClimate()"
+                                            style="margin-top: 10px;" [nbSpinner]="loadingClimate"
+                                            nbSpinnerStatus="info">Enviar</button>
+                                        <p class="caption status-success text-right fw-700" *ngIf="climate">Última
+                                            actualización: {{climate.creation_date | date: 'd/M/y'}} -
+                                            {{climate.author}}
+                                        </p>
+                                    </span>
+
+
+
+                                    <p *ngIf="!climate">
+                                        Sin datos
+                                    </p>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <p></p>
+                                    <h6 class="title-section">
+                                        La estrategia
+                                    </h6>
+                                    <span *ngIf="strategy">
+                                        <p>
+                                            {{strategy?.value}}
+                                        </p>
+                                        <p class="title-section">Corrección</p>
+
+                                        <textarea nbInput fullWidth placeholder="Correción"
+                                            [(ngModel)]="strategy.teacher_return"></textarea>
+
+                                        <button nbButton size="small" (click)="saveReturnStrategy()"
+                                            style="margin-top: 10px;" [nbSpinner]="loadingStrategy"
+                                            nbSpinnerStatus="info">Enviar</button>
+                                        <p class="caption status-success text-right fw-700">Última
+                                            actualización: {{strategy.creation_date | date: 'd/M/y'}} -
+                                            {{strategy.author}}
+                                        </p>
+                                    </span>
+
+                                    <p *ngIf="!strategy">
+                                        Sin datos
+                                    </p>
+                                </div>
+                            </div>
+                        </nb-accordion-item-body>
+                    </nb-accordion-item>
+                    <nb-accordion-item>
+                        <nb-accordion-item-header>Variables clave</nb-accordion-item-header>
+                        <nb-accordion-item-body>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="table-responsive" *ngIf="replies">
+                                        <table class="table table-striped table-bordered">
+                                            <thead class="thead-dark">
+                                                <tr>
+                                                    <th scope="col"></th>
+                                                    <th scope="col">Valor esperado</th>
+                                                    <th scope="col">Calificación</th>
+                                                    <th scope="col">Objetivo</th>
+                                                    <th scope="col">Limites</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let item of replies" class="table-warning" [ngClass]="{'table-warning': item.reply?.color == 'warning', 
+                                                'table-danger': item.reply?.color == 'danger',
+                                                        'table-success': item.reply?.color == 'success'}">
+                                                    <th scope="row">{{item.value}}</th>
+                                                    <td>
+                                                        {{ getCurrentColor(item)| nameColor}}
+                                                    </td>
+                                                    <td>
+                                                        {{item.reply?.color | nameColor}}
+                                                    </td>
+                                                    <td>
+                                                        <!-- Campo entero -->
+                                                        <span *ngIf="item.type == 'numeric'">
+                                                            {{item.reply?.value}}
+                                                        </span>
+                                                        <!-- Campo boleano -->
+                                                        <span *ngIf="item.type == 'boolean'">
+                                                            {{item.reply?.value ? 'Verdadero' : 'Falso'}}
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <span *ngIf="item.type == 'numeric'">
+                                                            {{item.min}} - {{item.max}}
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div *ngIf="!replies">
+                                        <p>Sin datos</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </nb-accordion-item-body>
+                    </nb-accordion-item>
+                    <nb-accordion-item>
+                        <nb-accordion-item-header>Los 7 elementos</nb-accordion-item-header>
+                        <nb-accordion-item-body>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="table-responsive" *ngIf="repliesElement">
+                                        <table class="table table-striped table-bordered">
+                                            <thead class="thead-dark">
+                                                <tr>
+                                                    <th scope="col">Calificación</th>
+                                                    <th scope="col">Análisis</th>
+                                                    <th scope="col">Compartido</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let item of repliesElement">
+                                                    <th scope="row">{{item.value}}</th>
+                                                    <td>
+                                                        {{item.reply?.value}}
+                                                    </td>
+                                                    <td>
+                                                        {{item.reply?.shared === '0' ? 'No' : 'Si'}}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div *ngIf="!repliesElement">
+                                        <p>Sin datos</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </nb-accordion-item-body>
+                    </nb-accordion-item>
+                </nb-accordion>
+
+            </div>
+        </div>
+
+    </nb-card-body>
+</nb-card>

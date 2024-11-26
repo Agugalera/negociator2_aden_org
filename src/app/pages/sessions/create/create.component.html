@@ -1,0 +1,189 @@
+<nb-card>
+    <nb-card-body>
+      <div class="row">
+        <div class="col">
+          <h5>Nombre de la sesión</h5>
+          <input
+            type="text"
+            nbInput
+            fullWidth
+            placeholder="Nombre"
+            [(ngModel)]="name"
+            style="margin-bottom: 16px"
+          />
+        </div>
+      </div>
+      <!-- <div class="row">
+        <div class="col-6" style="display: grid !important">
+          <input
+            type="text"
+            [disabled]="!courses?.length"
+            input-autocomplete
+            nbInput
+            fullWidth
+            [config]="config2"
+            [items]="courses"
+            (selectEvent)="changeCourse($event)"
+            placeholder="Seleccione curso"
+          />
+          <nb-select fullWidth placeholder="Seleccione curso" style="margin-bottom: 10px;"
+                      [(ngModel)]="selectedCourse" (selectedChange)="changeCourse()">
+                      <nb-option *ngFor="let item of courses" [value]="item">{{item.name}}</nb-option>
+                  </nb-select>
+        </div>
+        <div class="col-6">
+                  <nb-select fullWidth placeholder="Seleccione Modalidad" [(selected)]="modality">
+                      <nb-option value="{{item.id}}" *ngFor="let item of modalities">{{item.name}}</nb-option>
+                  </nb-select>
+  
+              </div>
+      </div> -->
+      <!-- <div class="row" *ngIf="modality == 1">
+        <div class="col"> -->
+      <!-- <h5>Selected range: {{ range.start | date }} - {{ range.end | date }}</h5> -->
+      <!-- <h5>Seleccione fechas</h5>
+          <nb-calendar-range [(range)]="range" [showHeader]="false">
+          </nb-calendar-range>
+        </div>
+        <div class="col">
+          <h5>Eventos</h5>
+        </div>
+      </div> -->
+  
+      <div class="row" cdkDropListGroup style="margin-top: 16px">
+        <div class="drag-container col-4">
+          <div class="column-flex">
+            <h5>Alumnos</h5>
+  
+            <!-- <div *ngIf="!students || students?.length == 0 && studentsCopy?.length == 0">
+                          <nb-alert accent="warning">Por favor seleccione un curso para comenzar</nb-alert>
+                      </div> -->
+            <button nbButton (click)="getStudents()">Actualizar listado</button>
+            <input
+              nbInput
+              fullWidth
+              id="search-input"
+              [formControl]="searchControl"
+              type="text"
+              (keyup)="getStudents()"
+              placeholder="Buscar"
+            />
+            <!-- <nb-form-field>
+              <nb-icon nbPrefix icon="at-outline" pack="eva"></nb-icon>
+              <input type="text" nbInput>
+            </nb-form-field> -->
+            <div
+              *ngIf="students?.length > 0 || studentsCopy?.length > 0"
+              cdkDropList
+              [cdkDropListData]="students"
+              class="drag-list"
+              (cdkDropListDropped)="drop($event)"
+              style="
+                height: 100% !important;
+                background-color: #f7f9fc;
+                min-height: 400px;
+              "
+            >
+              <div class="drag-box" *ngFor="let item of students" cdkDrag>
+                <p>
+                  {{
+                    (item.firstname | ngxCapitalize) +
+                      " " +
+                      (item.lastname | ngxCapitalize)
+                  }}
+                </p>
+                <span> {{ item.email }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="col">
+          <nb-alert
+            accent="info"
+            outline
+            *ngFor="let item of blocks; let i = index"
+          >
+            <div class="row">
+              <h5 class="col">Mesa de Negociación {{ i + 1 }}</h5>
+              <button
+                *ngIf="i != 0"
+                class="close-session"
+                nbButton
+                ghost
+                status="danger"
+              >
+                <nb-icon
+                  icon="close-outline"
+                  (click)="removeSession(i, item)"
+                ></nb-icon>
+              </button>
+            </div>
+            <div class="row">
+              <div class="drag-container col">
+                <h6>Equipo 1 - Arbotic</h6>
+  
+                <div
+                  cdkDropList
+                  [cdkDropListData]="item.team1"
+                  class="drag-list"
+                  (cdkDropListDropped)="drop($event)"
+                >
+                  <div class="drag-box" *ngFor="let item of item.team1" cdkDrag>
+                    <p>
+                      {{
+                        (item.firstname | ngxCapitalize) +
+                          " " +
+                          (item.lastname | ngxCapitalize)
+                      }}
+                    </p>
+                    <span> {{ item.email }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="drag-container col">
+                <h6>Equipo 2- Byntech</h6>
+  
+                <div
+                  cdkDropList
+                  [cdkDropListData]="item.team2"
+                  class="drag-list"
+                  (cdkDropListDropped)="drop($event)"
+                >
+                  <div class="drag-box" *ngFor="let item of item.team2" cdkDrag>
+                    <p>
+                      {{
+                        (item.firstname | ngxCapitalize) +
+                          " " +
+                          (item.lastname | ngxCapitalize)
+                      }}
+                    </p>
+                    <span> {{ item.email }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </nb-alert>
+          <div style="text-align: center">
+            <button nbButton (click)="addSession()">Agregar bloque</button>
+          </div>
+        </div>
+      </div>
+  
+      <div class="row" style="margin-top: 30px">
+        <div class="col">
+          <button
+            nbButton
+            fullWidth
+            status="primary"
+            (click)="startSimulation()"
+            [nbSpinner]="loadingCreate"
+            nbSpinnerStatus="info"
+            [disabled]="!name"
+          >
+            Iniciar simulador
+          </button>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>

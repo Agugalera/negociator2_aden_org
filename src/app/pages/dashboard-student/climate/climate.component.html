@@ -1,0 +1,69 @@
+<div class="row">
+    <div class="col">
+        <p></p>
+        <h6 class="title-section">Clima en la negociación
+            <nb-icon
+                nbTooltip="De acuerdo a la información, se evaluará el “clima” o contexto en el que se desarrollará la negociación, si el mismo será amigable, hostil, competitivo o colaborativo.
+                Esta descripción deberá ser sintética."
+                nbTooltipPlacement="bottom" nbTooltipStatus="primary" icon="question-mark-circle-outline">
+            </nb-icon>
+        </h6>
+        <span *ngIf="!climate?.return_date">
+            <textarea nbInput fullWidth placeholder="" [(ngModel)]="climate.value"
+                style="min-height: 200px;"></textarea>
+            <p class="caption status-success text-right fw-700" *ngIf="lastClimate">Última actualización:
+                {{lastClimate.creation_date | date: 'd/M/y'}} - {{lastClimate.author}}</p>
+            <div style="text-align: right; margin-top:20px;" *ngIf="!climate?.return_date">
+                <!-- <button nbButton style="margin-right: 5px;" size="small">Guardar</button> -->
+                <button nbButton size="small" (click)="saveClimate()" [nbSpinner]="loadingClimate"
+                    nbSpinnerStatus="info">Enviar</button>
+            </div>
+        </span>
+        <span *ngIf="climate?.return_date">
+            <p>
+                {{climate?.value}}
+            </p>
+            <p class="caption status-success text-right fw-700" *ngIf="lastClimate">Última actualización:
+                {{lastClimate.creation_date | date: 'd/M/y'}} - {{lastClimate.author}}</p>
+            <p class="title-section">Corrección</p>
+            <p>{{climate?.teacher_return}}</p>
+        </span>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <p></p>
+        <h6 class="title-section">
+            La estrategia
+            <nb-icon
+                nbTooltip="Se explicará sintéticamente qué estrategia se implementará en esta negociación: ganar/ perder, o ganar / ganar."
+                nbTooltipPlacement="bottom" nbTooltipStatus="primary" icon="question-mark-circle-outline">
+            </nb-icon>
+        </h6>
+        <span *ngIf="!strategy?.return_date">
+            <textarea nbInput fullWidth placeholder="" [(ngModel)]="strategy.value" style="min-height: 200px;"></textarea>
+            <p class="caption status-success text-right fw-700" *ngIf="lastStrategy">Última actualización:
+                {{lastStrategy.creation_date | date: 'd/M/y'}} - {{lastStrategy.author}}</p>
+            <div style="text-align: right; padding-top: 10px;">
+                <button nbButton size="small" (click)="saveStrategy()" [nbSpinner]="loadingStrategy"
+                    nbSpinnerStatus="info">Enviar</button>
+            </div>
+        </span>
+        <span *ngIf="strategy?.return_date">
+            <p>
+                {{strategy?.value}}
+            </p>
+            <p class="caption status-success text-right fw-700" *ngIf="lastStrategy">Última actualización:
+                {{lastStrategy.creation_date | date: 'd/M/y'}} - {{lastStrategy.author}}</p>
+            <p class="title-section">Corrección</p>
+            <p>{{strategy.teacher_return}}</p>
+        </span>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col button-next">
+        <button nbButton status="primary" (click)="goToVariablesKey()">Siguiente</button>
+    </div>
+</div>

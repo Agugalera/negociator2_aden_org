@@ -1,0 +1,63 @@
+<nb-accordion>
+    <nb-accordion-item #item [expanded]="expand">
+        <nb-accordion-item-header>
+            {{name}} - {{date}}
+        </nb-accordion-item-header>
+        <nb-accordion-item-body style="padding: 0px;" *ngFor="let block of session.blocks">
+            <!-- <button nbButton ghost status="primary" (click)="openCalendar()">
+                <nb-icon icon="calendar"></nb-icon> Ver calendario
+            </button> -->
+            <div class="row" style="border-bottom: 1px solid #b3221a;">
+                <div class="col-12 col-lg-8">
+                    <div class="row" style="text-align: center;">
+                        <div class="col-5">
+                            <p><strong>EQUIPO 1 - ARBOTIC</strong></p>
+                            <nb-list>
+                                <nb-list-item *ngFor="let g of block.groups |  filterBy: ['id_company']: 1">
+                                    <nb-user *ngFor="let item of g.students" [name]="getFullName(item)">
+                                    </nb-user>
+                                </nb-list-item>
+                            </nb-list>
+                        </div>
+                        <div class="col-2" style="align-self: center;">
+                            <p><strong>VS</strong></p>
+                        </div>
+                        <div class="col-5">
+                            <p><strong>EQUIPO 2 - BYNTECH</strong></p>
+                            <nb-list>
+                                <nb-list-item *ngFor="let g of block.groups |  filterBy: ['id_company']: 2">
+                                    <nb-user *ngFor="let item of g.students" [name]="getFullName(item)">
+                                    </nb-user>
+                                </nb-list-item>
+                            </nb-list>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <nb-alert outline="info">
+                        <h5>Información</h5>
+                        <p> {{block.state == 'information' ? 'Etapa: Information' : 
+                            (block.state == 'pre' ? 'Pre Negociación' : 
+                             (block.state == 'negotation' ? 'Negociación' : 'Etapa: Finalizado')) }}
+                            <span *ngIf="block.state == 'negotation'">
+                                - {{ block.stage == 1 ? 'Esperando propuesta Arbotic' : 'Esperando propuesta Byntech'  }}
+                            </span>
+                            </p>
+                        <p *ngIf="block.state == '1'">Estado: Esperando Respuesta del Equipo 1</p>
+                        <button nbButton [routerLink]="['/pages/sessions/view/'+ block.id_session + '/' + block.id ]"
+                            routerLinkActive="router-link-active">
+                            <nb-icon icon="eye"></nb-icon>
+                            Ver detalle
+                        </button>
+                        <button *ngIf="block.state == '0'" nbButton
+                            routerLinkActive="router-link-active">
+                            <nb-icon icon="download"></nb-icon>
+                            Descargar contrato
+                        </button>
+
+                    </nb-alert>
+                </div>
+            </div>
+        </nb-accordion-item-body>
+    </nb-accordion-item>
+</nb-accordion>

@@ -1,0 +1,10 @@
+@import '../../@theme/styles/styles.scss';
+
+@include nb-install-component() {
+  .cancel {
+    margin-right: 1rem;
+  }
+}
+nb-card {
+    max-width: 300px;
+}

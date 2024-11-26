@@ -1,0 +1,43 @@
+<nb-card>
+    <nb-card-body class="example-items-col">
+        <form [formGroup]="form" *ngIf="form">
+            <h6>Nombre</h6>
+            <input type="text" nbInput fullWidth fieldSize="small" placeholder="Ingrese el nombre de la variables"
+                formControlName="value">
+
+            <h6>Tipo de variable</h6>
+            <nb-checkbox status="primary" [checked]="!boolean.value" (checkedChange)="changeBoolean()">{{'Númerica'}}
+            </nb-checkbox>
+            <nb-checkbox status="primary" [checked]="boolean.value" (checkedChange)="changeBoolean()">
+                {{'De dos decisiones (Si/No)'}}</nb-checkbox>
+
+            <span *ngIf="!boolean.value">
+                <h6>Máximo</h6>
+                <input type="number" nbInput fullWidth fieldSize="small" placeholder="Máximo" formControlName="max">
+                <h6>Mínimo</h6>
+                <input type="number" nbInput fullWidth fieldSize="small" placeholder="Mínimo" formControlName="min">
+            </span>
+            <h6>Unidad</h6>
+            <input type="text" nbInput fullWidth fieldSize="small" placeholder="Unidad" formControlName="unit">
+            <h6>Devolución empresa Arbotic</h6>
+            <textarea nbInput fullWidth placeholder="Devolución" formControlName="reply_a"></textarea>
+            <h6>Devolución empresa Byntech</h6>
+            <textarea nbInput fullWidth placeholder="Devolución" formControlName="reply_b"></textarea>
+            <h6>Color empresa Arbotic</h6>
+            <nb-select placeholder="Color" formControlName="color_a" fullWidth>
+                <nb-option [value]="item.value" *ngFor="let item of colors">{{item.name}}</nb-option>
+            </nb-select>
+            <h6>Color empresa Byntech</h6>
+            <nb-select placeholder="Color" formControlName="color_b" fullWidth>
+                <nb-option [value]="item.value" *ngFor="let item of colors">{{item.name}}</nb-option>
+            </nb-select>
+            <br />
+        </form>
+        <div class="row" style="margin-top:15px !important;">
+            <div class="col">
+                <button nbButton status="primary" (click)="save()" [disabled]="!form.valid">Actualizar</button>
+                <button nbButton status="primary" (click)="back()" style="margin-left: 10px !important;">Volver</button>
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>

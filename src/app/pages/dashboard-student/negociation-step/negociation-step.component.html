@@ -1,0 +1,134 @@
+<div class="row">
+  <div class="col" style="text-align: center;">
+    <h3>Negociación</h3>
+  </div>
+</div>
+<div *ngIf="state === 'information' || state === 'pre'">
+  <div class="row" style="text-align: center;">
+    <div class="col">
+      <p>Siempre hemos aclarado que la negociación es un proceso por lo tanto el Simulador lo refleja claramente. Para
+        poder entrar a la etapa de NEGOCIACIÓN debemos completar la etapa de PRE NEGOCIACIÓN.</p>
+    </div>
+  </div>
+</div>
+
+
+<span *ngIf="state === 'negotation' || state === 'finalized'">
+  <div class="row">
+
+    <div class="col" style="text-align: justify;">
+
+      <p>Una vez que se ha completado la etapa de Pre negociación se accede a la etapa de Negociación o Mesa de
+        Negociación o Negociación Formal. Se negociarán las 11 variables analizadas en la etapa previa y se comenzarán a
+        generar propuestas.</p>
+
+
+      <p> Cada cada equipo generará una propuesta ,tendrán la opción de simular la propuesta para poder analizar en
+        gráficos si es positiva o no para el equipo.
+        Los gráficos contienen explicaciones sobre su contenido.</p>
+
+      <p *ngIf="companyId == 1">
+        En el gráfico de ”resultados generales” se va a ver reflejado realmente lo que logran
+        obtener: recuerden que necesitan en esta negociación MARGEN, MARKET SHARE y SEGURIDAD.Su objetivo es ser el
+        líder mundial en la comercialización de robótica y por lo tanto necesitan penetrar mercados y asegurar el
+        abastecimiento de Byntech Inc.
+      </p>
+      <p *ngIf="companyId == 2">
+        En el gráfico de ”resultados generales” se va a ver reflejado realmente lo que logran obtener: recuerden que
+        ustedes necesitan MARGEN Y SEGURIDAD ya que tienen sobre-stock y un mercado interno saturado. Byntech Inc. no
+        necesita MARKET SHARE porque no va a comercializar en los mercados externos.
+      </p>
+      <p>A medida que se intercambian las propuestas se van perfeccionando.</p>
+      <p>Ustedes podrán simular las propuestas que envían y también las que reciben del otro equipo.</p>
+
+    </div>
+  </div>
+
+  <div class="row" fullWidth>
+    <span class="col-12" *ngIf="stage != companyId && state !== 'finalized'">
+
+      <nb-alert outline="primary" role="alert" style="text-align: center;">
+        
+        <h5 *ngIf="phase == 1 && (companyId == 2 || companyId == '2')">
+          La empresa {{companyId == 1 || companyId == '1' ? environment.ByntechName :  environment.ArboticName}}
+          se encuentra realizando la primera propuesta.</h5>
+
+        <h5 *ngIf="phase > 1">La empresa {{companyId == 1 || companyId == '1' ? environment.ByntechName :  environment.ArboticName}}
+          se encuentra analizando la propuesta.</h5>
+        <p>
+          Esperando a que llegue la propuesta. Deberán analizar la oferta recibida y podrán simular los
+          resultados de la misma. Es importante destacar que cuantas más propuestas intercambien las partes, mejor serán los resultados.
+        </p>
+      </nb-alert>
+    </span>
+    <span *ngIf="(negotations?.length) || (state === 'finalized' && negotations?.length)">
+      <div class="col-12">
+        <div class="row title">
+          <div class="col" *ngIf="state != 'finalized'">
+            <h6>{{ phase > 1  ? 'Modificar' : 'Crear'}} propuesta</h6>
+          </div>
+          <!-- <div class="col" style="text-align: right;">
+          <button nbButton *ngIf="negotations.length" (click)="openHistorial()">Historial</button>
+        </div> -->
+        </div>
+        <div class="table-responsive" [ngClass]="{'disable-events' : state === 'finalized'}">
+          <nb-alert *ngIf="lastMessage" outline="info">Mensaje enviado por la otra empresa: {{lastMessage}}</nb-alert>
+          <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Variables</th>
+                <th scope="col">Prioridad</th>
+                <th scope="col">Propuesta</th>
+                <th scope="col">Limites</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of negotations">
+                <th scope="row">{{item.value}}</th>
+                <td>
+                  {{ companyId == 1 ? 
+                    item.color_a === 'danger' ? 'Prioritaria' : 'No prioritaria'
+                    :  item.color_b === 'danger' ? 'Prioritaria' : 'No prioritaria'}}
+                </td>
+                <td>
+                  <!-- Campo entero -->
+                  <span *ngIf="item.type == 'numeric'">
+                    <input nbInput type="number" name="valueReply" class="form-control" [(ngModel)]="item.valueReply"
+                      #value="ngModel" [min]="item.min" [max]="item.max" [ngClass]="{ 'is-invalid': value.invalid }">
+                    <div *ngIf="value.invalid" class="invalid-feedback">
+                      <div *ngIf="value.errors.min || value.errors.max">
+                        Ingrese un valor dentro del rango esperado
+                      </div>
+                    </div>
+                  </span>
+                  <!-- Campo boleano -->
+                  <span *ngIf="item.type == 'boolean'">
+                    <nb-toggle [(ngModel)]="item.valueReply">
+                      {{item.valueReply ? 'Si' : 'No'}}
+                    </nb-toggle>
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="item.type == 'numeric'">{{item.min}}-{{item.max}} {{item.unit}} </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <textarea nbInput fullWidth placeholder="Mensaje (Opcional)" [(ngModel)]="message"></textarea>
+        </div>
+
+        <!-- <textarea nbInput fullWidth style="height: 300px; max-height: 100%;" [(ngModel)]="value"></textarea> -->
+        <div style="text-align: right; margin-top: 20px;">
+          <button nbButton style="margin-right: 20px;" (click)="openSimulation()">Simular</button>
+          <button nbButton (click)="confirmSave()" [nbSpinner]="loading" nbSpinnerStatus="info"
+            [disabled]="state == 'finalized' || stage != companyId">Enviar</button>
+          <button nbButton style="margin-left: 20px;" [nbSpinner]="loadingFinalized" nbSpinnerStatus="info"
+            (click)="confirmFinalized()" *ngIf="(phase > 1 && state != 'finalized')"
+            [disabled]="state == 'finalized' || stage != companyId">Aceptar</button>
+        </div>
+      </div>
+
+    </span>
+
+  </div>
+</span>

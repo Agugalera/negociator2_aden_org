@@ -1,0 +1,13 @@
+nb-card {
+    margin-bottom: 0px !important;
+    height: 100% !important;
+}
+
+::ng-deep .strong-user {
+    .user-name {
+        font-weight: 700 !important;
+    }
+    .user-picture {
+        font-weight: 600 !important;
+    }
+}

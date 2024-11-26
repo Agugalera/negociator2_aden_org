@@ -1,0 +1,13 @@
+<nb-list *ngIf="notifications?.length">
+  <nb-list-item *ngFor="let item of notifications">
+    <p class="caption status-primary text-left fw-500">
+      {{item.creation_date | date: 'M/d h:mm a'}}
+    </p>
+    <div class="innerHtml" [innerHTML]="item.body"></div>
+  </nb-list-item>
+</nb-list>
+<nb-list *ngIf="!notifications?.length">
+  <nb-list-item>
+    Aún no tienes notificaciones
+  </nb-list-item>
+</nb-list>

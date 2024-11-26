@@ -1,0 +1,68 @@
+<nb-stepper orientation="horizontal" selectedIndex="0" linear="false">
+    <nb-step label="Información" completed="true">
+        <ngx-step-information [block]="block" (updated)="updateBlock(($event))"></ngx-step-information>
+    </nb-step>
+    <nb-step label="Pre Negociación" style="padding: 0px;">
+        <ngx-step-prenegotation *ngIf="block" [block]="block"></ngx-step-prenegotation>
+    </nb-step>
+    <nb-step label="Negociación">
+        <ngx-step-negotation *ngIf="block" [block]="block"></ngx-step-negotation>
+    </nb-step>
+    <nb-step label="Finalizado">
+        <nb-card *ngIf="block?.state !== 'finalized'">
+            <nb-card-body>
+                <div>
+                    <div class="row" style="text-align: center;">
+                        <div class="col">
+                            <h3>La etapa aún no se encuentra disponible</h3>
+                        </div>
+                    </div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+        <span *ngIf="block?.state === 'finalized'">
+            <div class="row" fullWidth style="text-align: center; margin-bottom: 20px !important;">
+                <div class="col">
+                    <button nbButton fullWidth size="small" (click)="sendEmailAll()">Enviar email</button>
+                </div>
+                <!-- <div class="col">
+                    <button nbButton fullWidth size="small" (click)="goCanvas()">Curso en Canvas</button>
+                </div> -->
+                <!-- <div class="col">
+                    <button nbButton fullWidth size="small">Calendario</button>
+                </div> -->
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <nb-card class="inline-form-card">
+                        <nb-card-header>Equipo 1 - Arbotic</nb-card-header>
+                        <nb-card-body>
+                            <nb-list *ngIf="block">
+                                <nb-list-item style="padding: 0px;" *ngFor="let g of block.groups  |  filterBy: ['id_company']: 1">
+                                    <nb-user *ngFor="let item of g.students"  [name]="getFullName(item)">
+                                    </nb-user>
+                                </nb-list-item>
+                            </nb-list>
+                            <button nbButton fullWidth size="small" (click)="sendEmailGroup(block.groups[0])">Enviar email al equipo</button>
+                        </nb-card-body>
+                    </nb-card>
+                </div>
+                <div class="col-6">
+                    <nb-card class="inline-form-card">
+                        <nb-card-header>Equipo 2 - Byntech</nb-card-header>
+                        <nb-card-body>
+                            <nb-list *ngIf="block">
+                                <nb-list-item style="padding: 0px;"  *ngFor="let g of block.groups |  filterBy: ['id_company']: 2">
+                                    <nb-user *ngFor="let item of g.students" [name]="getFullName(item)">
+                                    </nb-user>
+                                </nb-list-item>
+                            </nb-list>
+                            <button nbButton fullWidth size="small" (click)="sendEmailGroup(block.groups[1])">Enviar email al equipo</button>
+                        </nb-card-body>
+                    </nb-card>
+                </div>
+            </div>
+        </span>
+
+    </nb-step>
+</nb-stepper>

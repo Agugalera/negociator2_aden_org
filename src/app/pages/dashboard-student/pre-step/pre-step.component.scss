@@ -1,0 +1,38 @@
+@import "~@nebular/theme/styles/themes";
+
+.title-section {
+  color: #b31d15 !important;
+  margin-top: 20px;
+  // text-transform: uppercase;
+}
+
+.variable-item {
+  padding: 0px;
+  .variable-container {
+    display: inline-flex;
+    width: 100%;
+    span {
+      width: 100%;
+      nb-alert,
+      input {
+        margin-bottom: 0.3rem;
+        padding: 0.3rem 0.3rem;
+        text-align: center;
+      }
+    }
+    input {
+      margin: 0 0.5rem 0.3rem 0.5rem;
+      padding: 0.3rem 0.3rem;
+      text-align: center;
+    }
+  }
+}
+.bg-dark {
+  background-color: #2b2b2b;
+  color: #ffffff;
+}
+
+h3,
+th {
+  text-transform: capitalize;
+}

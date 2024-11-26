@@ -1,0 +1,136 @@
+<!-- <div class="row">
+  <div class="col" style="text-align: center;">
+    <h4 style="color: #b31d15;">NEGOCIATOR</h4>
+  </div>
+</div> -->
+<h1 id="title" class="title">
+  <img
+    style="width: 90% !important; padding: 20px 0px"
+    src="assets/images/logo_aden.png"
+  />
+</h1>
+
+<nb-alert
+  *ngIf="showMessages.error && errors?.length && !submitted"
+  outline="danger"
+  role="alert"
+>
+  <p class="alert-title"><b>Error!</b></p>
+  <ul class="alert-message-list">
+    <li *ngFor="let error of errors" class="alert-message">{{ error }}</li>
+  </ul>
+</nb-alert>
+
+<nb-alert
+  *ngIf="showMessages.success && messages?.length && !submitted"
+  outline="success"
+  role="alert"
+>
+  <p class="alert-title"><b>Bienvenido!</b></p>
+  <ul class="alert-message-list">
+    <li *ngFor="let message of messages" class="alert-message">
+      {{ message }}
+    </li>
+  </ul>
+</nb-alert>
+
+<div [formGroup]="loginForm" aria-labelledby="title">
+  <div class="form-control-group">
+    <!-- <label for="input-email">Email address:</label> -->
+    <input
+      nbInput
+      fullWidth
+      id="input-firstname"
+      formControlName="firstname"
+      [status]="
+        firstname.dirty ? (firstname.invalid ? 'danger' : 'success') : ''
+      "
+      [attr.aria-invalid]="firstname.invalid && firstname.touched ? true : null"
+      placeholder="Nombre"
+    />
+    <ngx-validation-message
+      label="Nombre"
+      [showPattern]="firstname?.hasError('pattern') && firstname.touched"
+      [showRequired]="firstname?.errors?.required && firstname.touched"
+    ></ngx-validation-message>
+  </div>
+  <div class="form-control-group">
+    <!-- <label for="input-email">Email address:</label> -->
+    <input
+      nbInput
+      fullWidth
+      id="input-lastname"
+      formControlName="lastname"
+      [status]="lastname.dirty ? (lastname.invalid ? 'danger' : 'success') : ''"
+      [attr.aria-invalid]="lastname.invalid && lastname.touched ? true : null"
+      placeholder="Apellido"
+    />
+    <ngx-validation-message
+      label="Apellido"
+      [showPattern]="lastname?.hasError('pattern') && lastname.touched"
+      [showRequired]="lastname?.errors?.required && lastname.touched"
+    ></ngx-validation-message>
+  </div>
+  <div class="form-control-group">
+    <!-- <label for="input-email">Email address:</label> -->
+    <input
+      nbInput
+      fullWidth
+      id="input-email"
+      formControlName="email"
+      [status]="email.dirty ? (email.invalid ? 'danger' : 'success') : ''"
+      [attr.aria-invalid]="email.invalid && email.touched ? true : null"
+      placeholder="Email address"
+    />
+    <ngx-validation-message
+      label="Email address"
+      [showPattern]="email?.hasError('pattern') && email.touched"
+      [showRequired]="email?.errors?.required && email.touched"
+    ></ngx-validation-message>
+  </div>
+
+  <div class="form-control-group">
+    <input
+      nbInput
+      fullWidth
+      id="input-password"
+      formControlName="password"
+      type="password"
+      [status]="password.dirty ? (password.invalid ? 'danger' : 'success') : ''"
+      (keyup.enter)="register()"
+      placeholder="Password"
+    />
+    <ngx-validation-message
+      label="Password"
+      [showMinLength]="password?.hasError('minlength') && password.touched"
+      [showMaxLength]="password?.hasError('maxlength') && password.touched"
+      [showRequired]="password?.errors?.required && password.touched"
+      [showPassPattern]="password?.hasError('pattern') && password.touched"
+      [minLength]="minLength"
+      [maxLength]="maxLength"
+    ></ngx-validation-message>
+  </div>
+
+  <button
+    nbButton
+    fullWidth
+    status="primary"
+    size="large"
+    (click)="register()"
+    [disabled]="submitted || !loginForm.valid"
+    [class.btn-pulse]="submitted"
+  >
+    Crear cuenta
+  </button>
+  <!-- 
+  <div class="form-control-group accept-group">
+    <nb-checkbox name="rememberMe" *ngIf="rememberMe">Recordarme</nb-checkbox>
+  </div> -->
+  <br />
+  <div class="changePage mt-3">
+    ¿Ya tienes cuenta?
+    <a [routerLink]="['/auth/login']" routerLinkActive="router-link-active"
+      >Iniciar sesión</a
+    >
+  </div>
+</div>

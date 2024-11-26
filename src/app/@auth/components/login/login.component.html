@@ -1,0 +1,106 @@
+<!-- <div class="row">
+  <div class="col" style="text-align: center;">
+    <h4 style="color: #b31d15;">NEGOCIATOR</h4>
+  </div>
+</div> -->
+<h1 id="title" class="title">
+  <img
+    style="width: 90% !important; padding: 20px 0px"
+    src="assets/images/logo_aden.png"
+  />
+</h1>
+
+<nb-alert
+  *ngIf="showMessages.error && errors?.length && !submitted"
+  outline="danger"
+  role="alert"
+>
+  <p class="alert-title"><b>Error!</b></p>
+  <ul class="alert-message-list">
+    <li *ngFor="let error of errors" class="alert-message">{{ error }}</li>
+  </ul>
+</nb-alert>
+
+<nb-alert
+  *ngIf="showMessages.success && messages?.length && !submitted"
+  outline="success"
+  role="alert"
+>
+  <p class="alert-title"><b>Bienvenido!</b></p>
+  <ul class="alert-message-list">
+    <li *ngFor="let message of messages" class="alert-message">
+      {{ message }}
+    </li>
+  </ul>
+</nb-alert>
+
+<div [formGroup]="loginForm" aria-labelledby="title">
+  <div class="form-control-group">
+    <!-- <label for="input-email">Email address:</label> -->
+    <input
+      nbInput
+      fullWidth
+      id="input-email"
+      formControlName="email"
+      [status]="email.dirty ? (email.invalid ? 'danger' : 'success') : ''"
+      [attr.aria-invalid]="email.invalid && email.touched ? true : null"
+      placeholder="Email address"
+    />
+    <ngx-validation-message
+      label="Email address"
+      [showPattern]="email?.hasError('pattern') && email.touched"
+      [showRequired]="email?.errors?.required && email.touched"
+    ></ngx-validation-message>
+  </div>
+
+  <div class="form-control-group">
+    <input
+      nbInput
+      fullWidth
+      id="input-password"
+      formControlName="password"
+      type="password"
+      [status]="password.dirty ? (password.invalid ? 'danger' : 'success') : ''"
+      (keyup.enter)="login()"
+      placeholder="Password"
+    />
+    <ngx-validation-message
+      label="Password"
+      [showMinLength]="password?.hasError('minlength') && password.touched"
+      [showMaxLength]="password?.hasError('maxlength') && password.touched"
+      [showRequired]="password?.errors?.required && password.touched"
+      [minLength]="minLength"
+      [maxLength]="maxLength"
+    ></ngx-validation-message>
+  </div>
+
+  <button
+    nbButton
+    fullWidth
+    status="primary"
+    size="large"
+    (click)="login()"
+    [disabled]="submitted || !loginForm.valid"
+    [class.btn-pulse]="submitted"
+  >
+    Ingresar
+  </button>
+  <!-- <div class="form-control-group accept-group">
+    <nb-checkbox name="rememberMe" *ngIf="rememberMe">Recordarme</nb-checkbox>
+    <span class="label-with-link">
+      <a
+        class="forgot-password caption-2"
+        target="_blank"
+        href="https://fa.aden.org/password/forgot?tenantId=a988e21d-96c6-6310-28e5-d8b43c06852b&client_id=3c219e58-ed0e-4b18-ad48-f4f92793ae32&nonce=&redirect_uri=%2Flogin&response_type=code&scope=&state=WHmEm3q5D6Bpb0e6Y7ofYRg6f-9skrrr_tXR0tbCqAc&timezone=America%2FArgentina%2FBuenos_Aires&metaData.device.name=Linux%20Firefox&metaData.device.type=BROWSER"
+        >Olvide mi contraseña</a
+      >
+    </span>
+  </div> -->
+
+  <div class="changePage mt-5">
+    ¿Todavía no tienes cuenta?
+    <a [routerLink]="['/auth/register']" routerLinkActive="router-link-active"
+      >Registrarme</a
+    >
+  </div>
+</div>

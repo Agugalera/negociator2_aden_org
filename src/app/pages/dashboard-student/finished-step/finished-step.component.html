@@ -1,0 +1,47 @@
+<div *ngIf="state !== 'finalized'">
+    <div class="row">
+        <div class="col" style="text-align: center;">
+            <h3>Finalizado</h3>
+        </div>
+    </div>
+    <div class="row" style="text-align: center;">
+        <div class="col">
+            <p>Siempre hemos aclarado que la negociación es un proceso por lo tanto el Simulador lo refleja claramente.
+                Para poder entrar a la etapa de NEGOCIACIÓN debemos completar la etapa de PRE NEGOCIACIÓN; y luego de la
+                NEGOCIACIÓN podremos darlo por finalizado.</p>
+        </div>
+    </div>
+</div>
+<span *ngIf="state === 'finalized'">
+    <div class="row">
+        <div class="col" style="text-align: center;">
+            <h3>Finalizado</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col" style="text-align: justify;">
+            <p>Cuando ambas partes consideran que la propuesta que han recibido y simulado los acerca al objetivo a
+                lograr, ACEPTAN y se da por finalizada la negociación.</p>
+            <p>El Simulador mostrará entonces un CONTRATO FINAL.</p>
+            <p>Recuerden que siempre en negociaciones el contrato tiene que reflejar lo que se negoció.</p>
+        </div>
+    </div>
+    <div class="row" fullWidth>
+        <div class="col">
+            <h6>Estado: Finalizado</h6>
+        </div>
+    </div>
+    <div class="row" fullWidth>
+        <div class="col-6">
+            <button nbButton fullWidth style="margin-right: 20px; margin-bottom: 20px;" (click)="download()">
+                <nb-icon icon="download"></nb-icon>Descarga contrato
+            </button>
+        </div>
+        <!-- <div class="col-6">
+            <button nbButton fullWidth (click)="goCanvas()">
+                <nb-icon icon="settings"></nb-icon>
+                Ver curso en canvas
+            </button>
+        </div> -->
+    </div>
+</span>

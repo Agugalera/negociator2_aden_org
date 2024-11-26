@@ -1,0 +1,28 @@
+<nb-card>
+    <nb-card-body [formGroup]="form">
+
+        <div class="row" style="margin-top: 10px;">
+            <div class="col">
+                <span>
+                    <label for="subject">Asunto:</label>
+                    <input type="text" nbInput fullWidth fieldSize="small" formControlName='subject'>
+                </span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col" style="margin-top: 10px;">
+                <ngx-tiny-mce (editorKeyup)="addTextContent($event)"></ngx-tiny-mce>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px;">
+            <div class="col">
+                <button nbButton size="small" [disabled]="!form.valid" fullWidth (click)="send()">Enviar</button>
+            </div>
+            <div class="col">
+                <button nbButton size="small" fullWidth (click)="close()">Volver</button>
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>

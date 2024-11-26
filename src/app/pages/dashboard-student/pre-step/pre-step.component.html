@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="col" style="text-align: center;">
+        <h3>Pre Negociación</h3>
+    </div>
+</div>
+<div *ngIf="state === 'information'">
+    <div class="row" style="text-align: center;">
+        <div class="col">
+            <p>La pre negociación aún no está activa, primero debes finalizar la etapa de Información y el profesor
+                debe habilitarlos para continuar con esta etapa.</p>
+        </div>
+    </div>
+</div>
+<div *ngIf="state !== 'information'">
+    <div class="row">
+        <div class="col" style="text-align: justify;">
+            <p>Analizada toda la información se podrán detectar los intereses de ambas partes, definir los objetivos,
+                las alternativas y las opciones, se accederá entonces a la etapa de Pre Negociación.</p>
+        </div>
+    </div>
+    <div class="row" fullWidth style="text-align: center;">
+        <!-- <div class="col">
+            <button nbButton fullWidth size="small" [routerLink]="['/pages/meeting-room']"
+                routerLinkActive="router-link-active">Sala de reuniones</button>
+        </div>
+         <div class="col">
+            <button nbButton fullWidth size="small">Plazo máximo</button>
+        </div>
+        <div class="col">
+            <button nbButton fullWidth size="small">Calendario</button>
+        </div> -->
+    </div>
+    <nb-tabset fullWidth (changeTab)="updateTab($event)" *ngIf="state != 'information'">
+        <nb-tab id="climate" tabTitle="{{tabTitleClimate}}" [active]="activeTab === tabTitleClimate">
+            <ngx-climate [stage]="stage" [state]="state" (activeTab)="updateTab($event)" *ngIf="activeTab === tabTitleClimate"></ngx-climate>
+        </nb-tab>
+        <nb-tab tabId="variables" tabTitle="{{tabTitleVariables}}" [active]="activeTab === tabTitleVariables">
+            <ngx-variables-key (activeTab)="updateTab($event)"  *ngIf="activeTab === tabTitleVariables"></ngx-variables-key>
+        </nb-tab>
+        <nb-tab tabId="seven" tabTitle="{{tabTitleSeven}}" [active]="activeTab === tabTitleSeven">
+            <ngx-seven-elements [stage]="stage" [state]="state"  *ngIf="activeTab === tabTitleSeven"></ngx-seven-elements>
+        </nb-tab>
+        <!-- <nb-tab tabTitle="Empresa Byntech">
+            <div class="row">
+                <div class="col">
+                    <p *ngIf="company">
+                        {{company.aboutOther}}
+                    </p>
+                </div>
+            </div>
+        </nb-tab> -->
+    </nb-tabset>
+</div>

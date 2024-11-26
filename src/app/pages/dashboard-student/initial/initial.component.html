@@ -1,0 +1,34 @@
+<div class="container-modal">
+    <nb-card>
+        <nb-card-body>
+            <!-- <video></video> -->
+
+            <p>Negociator es un Simulador de Negociación que integra todas las etapas del proceso en un Caso muy
+                interesante referido al mundo de la robótica.</p>
+            <p>
+                Una de las partes es la Empresa Arbotic gran comercializador de robótica en su país que aspira
+                posicionarse como número uno en la comercialización mundial de robots .
+            </p>
+            <p>
+            El otro equipo es la Empresa Byntech gran fabricante de robótica en su país. La fiebre robótica ha hecho
+            que el mercado interno esté saturado produciendo un sobre-stock en la empresa, por lo tanto necesita
+            necesita urgentemente expandirse a nuevos mercados.
+            </p>
+            <p>Ambas empresas negociarán el acuerdo final.
+
+            </p>
+            <p>Ustedes verán en la etapa de información que ya han han tenido reuniones previas en las que se han
+                acordado algunos puntos.</p>
+            <div class="row">
+                <div class="col" style="text-align: center;">
+                    <nb-checkbox (checkedChange)="toggle($event)">No volver a mostrar</nb-checkbox>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 10px;">
+                <div class="col">
+                    <button nbButton size="small" fullWidth (click)="close()">Comenzar</button>
+                </div>
+            </div>
+        </nb-card-body>
+    </nb-card>
+</div>

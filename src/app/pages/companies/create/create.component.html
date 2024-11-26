@@ -1,0 +1,24 @@
+<nb-card>
+    <nb-card-body class="example-items-col">
+        <form [formGroup]="companyForm" *ngIf="companyForm">
+            <h6>Nombre</h6>
+            <input type="text" nbInput fullWidth fieldSize="small" placeholder="Ingrese el nombre de la empresa"
+                formControlName="name">
+            <h6>Bienvenida</h6>
+            <textarea nbInput fullWidth placeholder="Bienvenida" formControlName="welcome"></textarea>
+            <h6>Sobre nosotros</h6>
+            <textarea cdkTextareaAutosize nbInput fullWidth placeholder="Sobre nosotros"
+                formControlName="aboutMe"></textarea>
+            <h6>Sobre la otra empresa</h6>
+            <textarea nbInput fullWidth placeholder="Sobre la otra empresa" formControlName="aboutOther"></textarea>
+            <h6>Mercado</h6>
+            <textarea cdkTextareaAutosize nbInput fullWidth placeholder="Mercado" formControlName="market"></textarea>
+            <h6>Negociación</h6>
+            <textarea nbInput fullWidth placeholder="Negociación" formControlName="negotiation"></textarea>
+            <h6>Robots</h6>
+            <textarea nbInput fullWidth placeholder="Robots" formControlName="robots"></textarea>
+
+            <button nbButton status="primary" (click)="save()">Actualizar</button>
+        </form>
+    </nb-card-body>
+</nb-card>

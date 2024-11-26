@@ -1,0 +1,52 @@
+// @nebular theming framework
+@import '~@nebular/theme/styles/theming';
+// @nebular out of the box themes
+@import '~@nebular/theme/styles/themes/default';
+
+$nb-themes: nb-register-theme((
+  layout-padding-top: 2.25rem,
+
+  menu-item-icon-margin: 0 0.5rem 0 0,
+  
+  color-primary-100: #ff6d65, 
+  color-primary-200: #ef5951,
+  color-primary-300: #db453d,
+  color-primary-400: #c73129,
+  color-primary-500: #b31d15, // Color normal de ADEN
+  color-primary-600: #8e241b,
+  color-primary-700: #722116,
+  color-primary-800: #591704,
+  color-primary-900: #3c0000,
+
+  header-text-color: #ffffff,
+  
+  header-background-color: #222223,
+  sidebar-background-color: #2b2b2b,
+  sidebar-text-color: #ffffff,
+  sidebar-scrollbar-color: #ffffff,
+  sidebar-menu-item-highlight-color: #545454,
+  menu-item-icon-hover-color: #545454,
+  menu-item-active-background-color: #545454,
+  menu-item-active-text-color: #ffffff,
+  menu-item-divider-style: none,
+  menu-text-color: #ffffff,
+  menu-background-color: #2b2b2b,
+
+
+  card-height-tiny: 13.5rem,
+  card-height-small: 21.1875rem,
+  card-height-medium: 28.875rem,
+  card-height-large: 36.5625rem,
+  card-height-giant: 44.25rem,
+  card-margin-bottom: 1.875rem,
+  card-header-with-select-padding-top: 0.5rem,
+  card-header-with-select-padding-bottom: 0.5rem,
+
+  select-min-width: 6rem,
+
+  layout-padding: 	1.25rem 1.25rem 0.50rem,	
+
+  slide-out-background: #f7f9fc,
+  slide-out-shadow-color: 0 4px 14px 0 #8f9bb3,
+  slide-out-shadow-color-rtl: 0 4px 14px 0 #8f9bb3,
+), default, default);

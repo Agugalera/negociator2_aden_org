@@ -1,0 +1,48 @@
+<chart type="bar" [data]="data" [options]="options"
+    style="height: 350px; padding-top:30px; margin: 0 auto; max-width: 400px;"></chart>
+
+
+<nb-accordion>
+    <nb-accordion-item #item expanded="false">
+        <nb-accordion-item-header>
+            Información Adicional
+        </nb-accordion-item-header>
+        <nb-accordion-item-body style="padding: 0px;">
+            <p>
+                Este gráfico muestra los principales componentes del Resultado Operativo de Byntech (en base
+                al contrato firmado) y que forman parte de su Estado de Resultados. Sirve para ver el peso
+                relativo de cada uno de los gastos y visualizar el margen operativo final. Lo ideal es lograr el
+                mayor margen operativo posible y que el mismo tenga una tendencia creciente durante los 5
+                años.
+            </p>
+
+            <p>
+                <strong>Costo fabricación Arbotic:</strong>
+                corresponde al costo de fabricación de las piezas vendidas a
+                Arbotic y al costo de trasladar dichas piezas a las instalaciones del cliente.
+            </p>
+            <p>
+                <strong>Costo fabricación otros:</strong>
+                corresponde al costo de las piezas de los robots vendidos a
+                otros clientes y al costo de trasladar dichos robots a las instalaciones de cada uno de
+                ellos.
+            </p>
+            <p>
+                <strong>Costo ensamblado Otros:</strong>
+                corresponden al costo de ensamble de los robots vendidos a
+                otros clientes.
+            </p>
+            <p>
+                <strong>Costo Marketings:</strong>
+                corresponde al costo de promoción y publicidad del total de
+                unidades vendidas por Byntech.
+            </p>
+            <p>
+                <strong>Margen Operativo:</strong>
+                es el resultado que obtiene la empresa del contrato luego de restar
+                a los ingresos por ventas totales el total de costos incurridos.
+            </p>
+
+        </nb-accordion-item-body>
+    </nb-accordion-item>
+</nb-accordion>

@@ -1,0 +1,21 @@
+<nb-card>
+    <nb-card-body class="example-items-col">
+        <form [formGroup]="form" *ngIf="form">
+            <h6>Nombre</h6>
+            <input type="text" nbInput fullWidth fieldSize="small" placeholder="Ingrese el nombre de la variables"
+                formControlName="value">
+            <h6>Devolución Arbotic</h6>
+            <textarea nbInput fullWidth placeholder="Devolución" formControlName="reply_a"></textarea>
+            <h6>Devolución Byntech</h6>
+            <textarea nbInput fullWidth placeholder="Devolución" formControlName="reply_b"></textarea>
+            <nb-checkbox status="primary" formControlName="required">{{'Obligatoria'}}</nb-checkbox>
+
+        </form>
+        <div class="row" style="margin-top:15px !important;">
+            <div class="col">
+                <button nbButton status="primary" (click)="save()" [disabled]="!form.valid">Actualizar</button>
+                <button nbButton status="primary" (click)="back()" style="margin-left: 10px !important;">Volver</button>
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>

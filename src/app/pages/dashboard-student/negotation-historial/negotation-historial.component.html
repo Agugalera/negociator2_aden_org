@@ -1,0 +1,52 @@
+<nb-card *ngIf="loading" [nbSpinner]="true" nbSpinnerStatus="primary" style="padding: 1rem;">
+    <nb-card-body>
+    </nb-card-body>
+</nb-card>
+
+<nb-card *ngIf="!loading" style="width: 100% !important; margin: 0 auto; height: 100%;">
+    <nb-card-header>
+        <!-- Historial -->
+        <div class="row">
+            <div class="col-10" style="display: inline-flex !important;">
+                <h6 style="padding: 0.5rem 1rem;">Historial</h6>
+            </div>
+            <div class="col-2">
+                <button style="float: right;" nbButton ghost status="danger" size="small" (click)="close()">
+                    <nb-icon icon="close"></nb-icon>
+                </button>
+            </div>
+        </div>
+    </nb-card-header>
+    <nb-card-body>
+        <div class="row">
+            <div class="col">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Empresa</th>
+                                <th scope="col">Responsable</th>
+                                <th scope="col">Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of negotations">
+                                <td scope="row">
+                                    {{item.company_name}}
+                                </td>
+                                <td>
+                                    {{item.user_author.firstname}} {{item.user_author.lastname}}
+                                    ({{item.user_author.email}})
+
+                                </td>
+                                <td>
+                                    {{item.creation_date | date: 'd/M/y hh:mm'}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>

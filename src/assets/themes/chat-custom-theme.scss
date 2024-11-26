@@ -1,0 +1,54 @@
+$primary-color: #fff;
+$secondary-color: #b31d15;
+$text-color: #fff;
+
+%text-definition {
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.custom-theme {
+  @extend %text-definition;
+
+  .primary-background {
+    background-color: $primary-color;
+  }
+  .secondary-background {
+    background-color: #b31d15;
+  }
+  .primary-outline-color {
+    border-color: #a3a3a3;
+  }
+  .primary-text {
+    @extend %text-definition;
+    background-color: $secondary-color;
+  }
+  .friends-search-bar {
+    background-color: $primary-color;
+  }
+  .ng-chat-title {
+    color: #fff !important;
+  }
+  .unread-messages-counter-container,
+  .ng-chat-people-action,
+  .ng-chat-people-action > i {
+    color: $text-color;
+    background-color: $secondary-color;
+  }
+  .load-history-action {
+    background-color: $secondary-color;
+  }
+  .chat-window-input {
+    background-color: $primary-color;
+  }
+  .sent-chat-message-container,
+  .file-message-container {
+    background-color: $secondary-color;
+    border-color: $secondary-color;
+  }
+  .received-chat-message-container,
+  .file-message-container.received {
+    background-color: #ef5951;
+    border-color: #ef5951;
+  }
+}

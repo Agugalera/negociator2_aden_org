@@ -1,0 +1,26 @@
+<div class="row h-100">
+
+    <div class="col-12 h-100">
+        <nb-card class="h-100">
+            <nb-tabset fullWidth fullHeigth (changeTab)="changeTab($event)">
+                <nb-tab tabTitle="Sesiones Activas" active="{{'Sesiones Activas' == activeTab}}">
+                    <span *ngFor="let s of sessions; let i = index">
+                        <ngx-session-detail
+                            [date]="s.date"
+                            expand="false" [name]="s.name" [session]="s"></ngx-session-detail>
+                    </span>
+                </nb-tab>
+                <nb-tab tabTitle="Sesiones anteriores" active="{{'Sesiones anteriores' == activeTab}}">
+                    <span *ngFor="let s of sessionsInactives; let i = index">
+                        <ngx-session-detail
+                            [date]="s.date"
+                            expand="false"  [name]="s.name" [session]="s"></ngx-session-detail>
+                    </span>
+                </nb-tab>
+                <nb-tab tabTitle="Nueva sesión" active="{{'Nueva sesión' == activeTab}}">
+                    <ngx-create-session *ngIf="'Nueva sesión' == activeTab" (created)="createdSession($event)"></ngx-create-session>
+                </nb-tab>
+            </nb-tabset>
+        </nb-card>
+    </div>
+</div>

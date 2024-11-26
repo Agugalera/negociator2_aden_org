@@ -1,0 +1,19 @@
+<nb-card>
+    <!-- <nb-card-header>confim</nb-card-header> -->
+    <nb-card-body>
+        <h6>{{question}}</h6>
+    </nb-card-body>
+    <nb-card-footer>
+
+        <div class="row">
+            <div class="col">
+                <button fullWidth nbButton status="primary" (click)="cancel()" size='small'>Cancelar</button>
+
+            </div>
+            <div class="col">
+                <button nbButton status="primary" fullWidth (click)="submit()" size='small'>Aceptar</button>
+
+            </div>
+        </div>
+    </nb-card-footer>
+</nb-card>

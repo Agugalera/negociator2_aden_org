@@ -1,0 +1,96 @@
+<div class="row">
+    <div class="col" style="text-align: justify;">
+
+        <p>Como muestra el simulador hay 11 puntos que se van a negociar y por lo tanto esos 11 puntos o variables
+            pueden ser de diferentes categorías: rojas o urgentes, verdes o importantes, amarillas o superfluas.</p>
+
+        <div class="row">
+            <div class="col"
+                style="margin-bottom: 15px;background-color:#ff00005c;padding:1rem;color:#fff;margin-right: 10px;border-radius: 10px;">
+                <p><strong>VARIABLE ROJA (NO NEGOCIABLE)</strong></p>
+                <p>Es aquella variable dentro del objetivo a lograr que no podemos conceder. No
+                    nos permite generar opciones y si la concedemos no logramos el objetivo.</p>
+            </div>
+            <div class="col"
+                style="margin-bottom: 15px;background-color: #ffcb005c;padding: 1rem;color: #fff;margin-right: 10px;border-radius: 10px;">
+                <p><strong>VARIABLE AMARILLA ( SUPERFLUA)</strong></p>
+                <p> Es aquella variable dentro del objetivo que no es importante. Es la variable de concesión.</p>
+            </div>
+            <div class="col"
+                style="margin-bottom: 15px;background-color: #00ff105c;padding: 1rem;color: #fff;margin-right: 20px;border-radius: 10px;">
+                <p><strong>VARIABLE VERDE (IMPORTANTE)</strong></p>
+                <p>Es aquella variable que es importante pero permite al negociador generar
+                    opciones al respecto y concederla a cambio de otras variables importantes.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <p><strong>OBSERVACIÓN:</strong> En este caso de Negociación, en el objetivo de cada una de las partes hay una sóla variable roja, varias verdes o importantes y muy pocas amarillas o de concesión.</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Variables</th>
+                        <th scope="col">Calificación</th>
+                        <th scope="col">Obj. Esperado</th>
+                        <th scope="col">Limites</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of variables" class="table-warning" [ngClass]="{'table-warning': item.colorReply == 'warning', 'table-danger': item.colorReply == 'danger',
+                        'table-success': item.colorReply == 'success'}">
+                        <th scope="row">{{item.value}}</th>
+                        <td>
+                            <nb-select placeholder="Selecciona un color" [(ngModel)]="item.colorReply">
+                                <nb-option [value]="item.value" *ngFor="let item of colors">{{item.name}}
+                                </nb-option>
+                            </nb-select>
+                        </td>
+                        <td>
+                            <!-- Campo entero -->
+                            <span *ngIf="item.type == 'numeric'">
+                                <input nbInput type="number" name="valueReply" class="form-control"
+                                    [(ngModel)]="item.valueReply" #value="ngModel" [min]="item.min" [max]="item.max"
+                                    [ngClass]="{ 'is-invalid': value.invalid }">
+                                <div *ngIf="value.invalid" class="invalid-feedback">
+                                    <div *ngIf="value.errors.min || value.errors.max">
+                                        Ingrese un valor dentro del rango esperado
+                                    </div>
+                                </div>
+                            </span>
+                            <!-- Campo boleano -->
+                            <span *ngIf="item.type == 'boolean'">
+                                <nb-toggle [(ngModel)]="item.valueReply">
+                                    {{item.valueReply ? 'Si' : 'No'}}
+                                </nb-toggle>
+                            </span>
+                        </td>
+                        <td>
+                            <span *ngIf="item.type == 'numeric'">
+                                {{item.min}} - {{item.max}} {{item.unit}}
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="caption status-success text-right fw-700" *ngIf="lastUpdate">Última actualización:
+                {{lastUpdate.date | date: 'd/M/y'}} - {{lastUpdate.user}}</p>
+        </div>
+        <div style="text-align: right;">
+            <button nbButton size="small" (click)="saveVariables()" [nbSpinner]="loading"
+                nbSpinnerStatus="info">Enviar</button>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col button-next">
+        <button nbButton status="primary" (click)="goToSeven()">Siguiente</button>
+    </div>
+</div>

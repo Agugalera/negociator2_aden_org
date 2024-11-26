@@ -1,0 +1,179 @@
+<nb-card>
+  <nb-card-header>{{ mode }} usuario</nb-card-header>
+  <nb-card-body>
+    <div [formGroup]="userForm" class="container">
+      <div class="form-group">
+        <label for="firstname">Nombre</label>
+        <input
+          nbInput
+          fullWidth
+          id="firstname"
+          formControlName="firstname"
+          [status]="
+            firstname?.hasError('minlength') || firstname?.hasError('maxlength')
+              ? 'danger'
+              : 'primary'
+          "
+          class="form-control"
+          placeholder="Last Name"
+        />
+        <ngx-validation-message
+          label="Last Name"
+          [showMinLength]="firstname?.hasError('minlength')"
+          [showMaxLength]="firstname?.hasError('maxlength')"
+          minLength="3"
+          maxLength="20"
+        ></ngx-validation-message>
+      </div>
+
+      <div class="form-group">
+        <label for="lastname">Apellido</label>
+        <input
+          nbInput
+          fullWidth
+          id="lastname"
+          formControlName="lastname"
+          [status]="
+            lastname?.hasError('minlength') || lastname?.hasError('maxlength')
+              ? 'danger'
+              : 'primary'
+          "
+          class="form-control"
+          placeholder="Last Name"
+        />
+        <ngx-validation-message
+          label="Last Name"
+          [showMinLength]="lastname?.hasError('minlength')"
+          [showMaxLength]="lastname?.hasError('maxlength')"
+          minLength="3"
+          maxLength="20"
+        ></ngx-validation-message>
+      </div>
+
+      <!-- <div class="form-group">
+        <label for="inputsisid">Sisid</label>
+        <input nbInput id="inputsisid" formControlName="sisid"
+          [status]="(sisid?.errors?.required) ? 'danger' : 'primary'"
+          class="form-control" placeholder="sisid">
+        <ngx-validation-message label="sisid" [showRequired]="sisid?.errors?.required"></ngx-validation-message>
+      </div> -->
+
+      <div class="form-group">
+        <label for="inputRole">Role</label>
+        <nb-select
+          id="inputRole"
+          placeholder="Seleccionar"
+          fullWidth
+          [formControl]="id_profile"
+        >
+          <nb-option *ngFor="let item of roles" [value]="item.key">{{
+            item.name
+          }}</nb-option>
+        </nb-select>
+        <!-- <input nbInput id="inputRole" formControlName="id_profile"
+          [status]="(id_profile?.errors?.required || id_profile?.hasError('pattern')) ? 'danger' : 'primary'"
+          class="form-control" placeholder="Rol"> -->
+        <ngx-validation-message
+          label="Role"
+          [showRequired]="id_profile?.errors?.required"
+        ></ngx-validation-message>
+      </div>
+
+      <div class="form-group">
+        <label for="inputEmail">Email</label>
+        <input
+          nbInput
+          id="inputEmail"
+          fullWidth
+          formControlName="email"
+          [status]="
+            email?.errors?.required || email?.hasError('pattern')
+              ? 'danger'
+              : 'primary'
+          "
+          class="form-control"
+          placeholder="Email"
+        />
+        <ngx-validation-message
+          label="Email"
+          [showPattern]="email?.hasError('pattern')"
+          [showRequired]="email?.errors?.required"
+          min="1"
+          max="120"
+        ></ngx-validation-message>
+      </div>
+
+      <div class="form-group">
+        <label for="inputsisid">Contraseña</label>
+        <div class="password-input">
+          <input
+            nbInput
+            fullWidth
+            id="input-password"
+            formControlName="password"
+            [type]="getInputType()"
+            class="form-control"
+            [status]="
+              password.dirty ? (password.invalid ? 'danger' : 'success') : ''
+            "
+            placeholder="Ingresa una contraseña"
+          />
+          <button
+            nbSuffix
+            nbButton
+            ghost
+            size="tiny"
+            (click)="toggleShowPassword()"
+          >
+            <nb-icon
+              [icon]="showPassword ? 'eye-outline' : 'eye-off-2-outline'"
+              pack="eva"
+              [attr.aria-label]="
+                showPassword ? 'hide password' : 'show password'
+              "
+            >
+            </nb-icon>
+          </button>
+        </div>
+        <ngx-validation-message
+          label="Password"
+          [showMinLength]="password?.hasError('minlength') && password.touched"
+          [showMaxLength]="password?.hasError('maxlength') && password.touched"
+          [showRequired]="password?.errors?.required && password.touched"
+          [showPassPattern]="password?.hasError('pattern') && password.touched"
+          [minLength]="8"
+          [maxLength]="16"
+        ></ngx-validation-message>
+      </div>
+
+      <!-- <div class="form-group">
+        <label for="inputState">Estado</label>
+        <nb-select
+          id="inputState"
+          placeholder="Seleccionar"
+          [formControl]="state"
+        >
+          <nb-option *ngFor="let item of states" [value]="item.key">{{
+            item.name
+          }}</nb-option>
+        </nb-select>
+        <ngx-validation-message
+          label="Estado"
+          [showRequired]="state?.errors?.required"
+        ></ngx-validation-message>
+      </div> -->
+    </div>
+  </nb-card-body>
+  <nb-card-footer>
+    <button
+      nbButton
+      status="primary"
+      [disabled]="!userForm.valid"
+      (click)="save()"
+      hero
+    >
+      Enviar
+    </button>
+    <button nbButton status="primary" (click)="back()" hero>Volver</button>
+  </nb-card-footer>
+</nb-card>

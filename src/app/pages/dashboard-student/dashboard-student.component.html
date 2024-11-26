@@ -1,0 +1,20 @@
+<div class="row h-100">
+    <div class="col h-100">
+        <nb-card size="giant" style="height: 95%;">
+            <span *ngIf="activeStep == 'information'" class="h-100">
+                <ngx-information-step *ngIf="company" [company]='company' [state]="state"></ngx-information-step>
+            </span>
+            <nb-card-body *ngIf="activeStep == 'pre'">
+                <ngx-pre-step [stage]="stage" [state]="state"></ngx-pre-step>
+            </nb-card-body>
+            <nb-card-body *ngIf="activeStep == 'negociation'">
+                <ngx-negociation-step [stage]="stage" [state]="state" (updated)="updateBlock(($event))">
+                </ngx-negociation-step>
+            </nb-card-body>
+            <nb-card-body *ngIf="activeStep == 'finished'">
+                <ngx-finished-step [stage]="stage" [state]="state"></ngx-finished-step>
+            </nb-card-body>
+        </nb-card>
+    </div>
+
+</div>

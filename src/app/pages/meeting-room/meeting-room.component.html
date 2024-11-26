@@ -1,0 +1,27 @@
+<div class="row h-100">
+    <div class="col">
+        <nb-card>
+            <nb-card-body>
+                <div class="row">
+                    <div class="col-10">
+                        <h6>Mi equipo</h6>
+                        <nb-list *ngIf="team">
+                            <nb-list-item>
+                                <nb-user [ngClass]="{'strong-user' : studentSisid == item.sisid}"
+                                    *ngFor="let item of team.students" [name]="getFullName(item)">
+                                </nb-user>
+                            </nb-list-item>
+                        </nb-list>
+                    </div>
+                </div>
+                <div class="row" *ngIf="team">
+                    <div class="col" style="text-align: center;padding-top: 15px;">
+                        <button nbButton style="max-width: 200px;" fullWidth size="small"
+                            (click)="sendEmailGroup()">Enviar email</button>
+                    </div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+
+    </div>
+</div>

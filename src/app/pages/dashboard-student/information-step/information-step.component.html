@@ -1,0 +1,31 @@
+<nb-card-body class="h-100 d-flex flex-column">
+    <div class="row">
+        <div class="col" style="text-align: center;">
+            <h3>Información</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col" style="text-align: justify;">
+            <p>Encontrarán información sobre su empresa, sobre la otra empresa con la que van a negociar,
+                como así también información muy precisa sobre el mercado de la robótica.
+            </p>
+            <p>En el final de la etapa de información encontrarán un resúmen de lo leído anteriormente: los
+                puntos que las empresas han acordado en negociaciones previas y lo que ambas empresas
+                quieren lograr en esta negociación final.
+            </p>
+        </div>
+    </div>
+    <div class="row flex-grow-1 row-info">
+        <embed *ngIf="company == 1" style="overflow: hidden; height: 100%; width: 100%;"
+            src="assets/info/arbotic/content/index.html" width="100%" />
+        <embed *ngIf="company == 2" style="overflow: hidden; height: 100%; width: 100%;"
+            src="assets/info/byntech/content/index.html" width="100%" />
+
+    </div>
+    <div class="row">
+        <div class="col button-next">
+            <button nbButton status="primary" [disabled]="state === 'information'"
+                [routerLink]="['/pages/dashboard-student/pre']" routerLinkActive="router-link-active">Siguiente</button>
+        </div>
+    </div>
+</nb-card-body>

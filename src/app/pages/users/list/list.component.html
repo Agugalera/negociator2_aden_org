@@ -1,0 +1,13 @@
+<nb-card class="margin-side">
+  <nb-card-header>
+    Usuarios
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table [settings]="settings" [source]="source" 
+    (edit)="goToEdit($event)"
+    (create)="goToAdd()"
+    (deleteConfirm)="onDeleteConfirm($event)">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>
